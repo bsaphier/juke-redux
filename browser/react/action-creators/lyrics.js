@@ -2,7 +2,7 @@ import { SET_LYRICS } from '../constants';
 import axios from 'axios';
 
 // action creator
-export const setLyrics = (text) => {
+const setLyrics = (text) => {
   return {
     type: SET_LYRICS,
     lyric: text

@@ -54,7 +54,7 @@ export default class AppContainer extends Component {
       playlists: playlists
     });
   }
-
+//**************//
   play () {
     AUDIO.play();
     this.setState({ isPlaying: true });
@@ -102,7 +102,7 @@ export default class AppContainer extends Component {
   setProgress (progress) {
     this.setState({ progress: progress });
   }
-
+//**************//
   selectAlbum (albumId) {
     axios.get(`/api/albums/${albumId}`)
       .then(res => res.data)
