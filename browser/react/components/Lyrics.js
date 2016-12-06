@@ -3,7 +3,6 @@ import React from 'react';
 const Lyrics = (props) => {
 
   const artistChange = event => props.setArtist(event.target.value);
-
   const songChange = event => props.setSong(event.target.value);
 
   return (

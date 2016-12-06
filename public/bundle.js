@@ -30647,26 +30647,27 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit() {
 	      if (this.state.artistQuery && this.state.songQuery) {
-	        _axios2.default.get('/api/lyrics/' + this.state.artistQuery + '/' + this.state.songQuery).then(function (response) {
-	          console.log(response);
-	          var setLyricsAction = (0, _lyrics.setLyrics)(response.data.lyric);
-	          _store2.default.dispatch(setLyricsAction);
+	        _axios2.default.get('/api/lyrics/' + this.state.artistQuery + '/' + this.state.songQuery)
+	        // .then(response => {
+	        //   console.log(response);
+	        //   const setLyricsAction = setLyrics(response.data.lyric);
+	        //   store.dispatch(setLyricsAction);
+	        // });
+	        .then(function (res) {
+	          console.log('RES:', res);
+	          return res.data.lyric;
+	        }).then(function (foundLyrics) {
+	          console.log('foundLyrics:', foundLyrics);
+	          console.log('SETLYRICS(FOUNDLYRICS)', (0, _lyrics.setLyrics)(foundLyrics));
+	          _store2.default.dispatch((0, _lyrics.setLyrics)(foundLyrics));
 	        });
-	        //  .then(res => {
-	        //    console.log(res);
-	        //    return res.data.lyric;
-	        //  })
-	        //  .then(foundLyrics => {
-	        //    console.log(foundLyrics);
-	        //    store.dispatch(setLyrics(foundLyrics));
-	        //  });
 	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(_Lyrics2.default, {
-	        test: this.state.text,
+	        text: this.state.text,
 	        setArtist: this.handleArtistInput,
 	        setSong: this.handleSongInput,
 	        artistQuery: this.artistQuery,
@@ -30685,7 +30686,7 @@
 /* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30698,36 +30699,36 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Lyrics = function Lyrics(props) {
+	  console.log('PROPS', props);
 	
 	  var artistChange = function artistChange(event) {
 	    return props.setArtist(event.target.value);
 	  };
-	
 	  var songChange = function songChange(event) {
 	    return props.setSong(event.target.value);
 	  };
 	
 	  return _react2.default.createElement(
-	    "div",
-	    { id: "lyrics" },
+	    'div',
+	    { id: 'lyrics' },
 	    _react2.default.createElement(
-	      "form",
+	      'form',
 	      { onSubmit: props.handleSubmit },
 	      _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
-	        _react2.default.createElement("input", { type: "text", value: props.artistQuery, placeholder: "Artist", onChange: artistChange }),
-	        _react2.default.createElement("input", { type: "text", value: props.songQuery, placeholder: "Song", onChange: songChange })
+	        _react2.default.createElement('input', { type: 'text', value: props.artistQuery, placeholder: 'Artist', onChange: artistChange }),
+	        _react2.default.createElement('input', { type: 'text', value: props.songQuery, placeholder: 'Song', onChange: songChange })
 	      ),
 	      _react2.default.createElement(
-	        "pre",
+	        'pre',
 	        null,
 	        props.text || 'Search above!'
 	      ),
 	      _react2.default.createElement(
-	        "button",
+	        'button',
 	        { onClick: props.handleSubmit },
-	        "Search for Lyrics"
+	        'Search for Lyrics'
 	      )
 	    )
 	  );

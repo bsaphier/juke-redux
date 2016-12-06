@@ -40,26 +40,19 @@ export default class LyricsContainer extends Component {
   handleSubmit() {
     if (this.state.artistQuery && this.state.songQuery) {
       axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
-        .then(response => {
-          console.log(response);
-          const setLyricsAction = setLyrics(response.data.lyric);
-          store.dispatch(setLyricsAction);
-        });
-        //  .then(res => {
-        //    console.log(res);
-        //    return res.data.lyric;
-        //  })
-        //  .then(foundLyrics => {
-        //    console.log(foundLyrics);
-        //    store.dispatch(setLyrics(foundLyrics));
-        //  });
+         .then(res => {
+           return res.data.lyric;
+         })
+         .then(foundLyrics => {
+           store.dispatch(setLyrics(foundLyrics));
+         });
     }
   }
 
   render () {
     return (
       <Lyrics
-        test={this.state.text}
+        text={this.state.text}
         setArtist={this.handleArtistInput}
         setSong={this.handleSongInput}
         artistQuery={this.artistQuery}
