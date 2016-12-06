@@ -3,7 +3,7 @@ import Lyrics from '../components/Lyrics';
 import axios from 'axios';
 
 import store from '../store';
-import { setLyrics } from '../action-creators/lyrics';
+import { setLyrics, fetchLyrics } from '../action-creators/lyrics';
 
 export default class LyricsContainer extends Component {
   constructor () {
@@ -37,17 +37,20 @@ export default class LyricsContainer extends Component {
     this.setState({ songQuery: song });
   }
 
+// we added async action creator using thunkMiddleware
   handleSubmit() {
+    console.log('STORE: ', store);
     if (this.state.artistQuery && this.state.songQuery) {
-      axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
-         .then(res => {
-           return res.data.lyric;
-         })
-         .then(foundLyrics => {
-           store.dispatch(setLyrics(foundLyrics));
-         });
+      store.dispatch(fetchLyrics(this.state.artistQuery, this.state.songQuery));
     }
   }
+  // axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
+  //    .then(res => {
+  //      return res.data.lyric;
+  //    })
+  //    .then(foundLyrics => {
+  //      store.dispatch(setLyrics(foundLyrics));
+  //    });
 
   render () {
     return (
