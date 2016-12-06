@@ -10,12 +10,17 @@ const Sidebar = (props) => {
       <img src="juke.svg" className="logo" />
       <section>
         <h4 className="menu-item">
-          <Link to='/albums'>ALBUMS</Link>
+          <Link to="/albums">ALBUMS</Link>
         </h4>
       </section>
       <section>
         <h4 className="menu-item">
-          <Link to='/artists'>ARTISTS</Link>
+          <Link to="/artists">ARTISTS</Link>
+        </h4>
+      </section>
+      <section>
+        <h4 className="menu-item">
+          <Link to="/lyrics">LYRICS</Link>
         </h4>
       </section>
       <hr />
@@ -41,6 +46,6 @@ const Sidebar = (props) => {
       </ul>
     </sidebar>
   );
-}
+};
 
 export default Sidebar;

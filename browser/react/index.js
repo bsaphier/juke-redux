@@ -10,6 +10,10 @@ import Songs from './components/Songs';
 import NewPlaylistContainer from './containers/NewPlaylistContainer';
 import Playlist from './components/Playlist';
 
+import store from './store';
+import {setLyrics} from './action-creators/lyrics';
+import LyricsContainer from './containers/LyricsContainer';
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path='/' component={AppContainer} foo={'foo'}>
@@ -22,6 +26,7 @@ ReactDOM.render(
       </Route>
       <Route path="/new-playlist" component={NewPlaylistContainer} />
       <Route path="playlists/:playlistId" component={Playlist} />
+      <Route path="/lyrics" component={LyricsContainer} />
       <IndexRedirect to='/albums' />
     </Route>
   </Router>,
