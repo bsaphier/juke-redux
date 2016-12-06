@@ -49,7 +49,7 @@ export const startSong = (song, list) => dispatch => {
 };
 
 export const toggle = () => (dispatch, getState) => {
-  const { isPlaying } = getState();
+  const { isPlaying } = getState().player; // see line 60
   if (isPlaying) dispatch(pause());
   else dispatch(play());
 };
@@ -57,8 +57,8 @@ export const toggle = () => (dispatch, getState) => {
 export const toggleOne = (selectedSong, selectedSongList) =>
   (dispatch, getState) => {
 
+    // this is where we had to lift player portion of state
     const { currentSong } = getState().player;
-    console.log('CURRENTSONG', currentSong);
     if (selectedSong.id !== currentSong.id)
       dispatch(startSong(selectedSong, selectedSongList));
     else dispatch(toggle());
@@ -66,10 +66,10 @@ export const toggleOne = (selectedSong, selectedSongList) =>
 
 export const next = () =>
   (dispatch, getState) => {
-    dispatch(startSong(...skip(1, getState())));
+    dispatch(startSong(...skip(1, getState().player)));
 };
 
 export const prev = () =>
   (dispatch, getState) => {
-    dispatch(startSong(...skip(-1, getState())));
+    dispatch(startSong(...skip(-1, getState().player)));
 };

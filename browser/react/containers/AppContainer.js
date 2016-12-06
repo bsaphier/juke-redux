@@ -31,7 +31,6 @@ export default class AppContainer extends Component {
     this.selectPlaylist = this.selectPlaylist.bind(this);
     this.loadSongs = this.loadSongs.bind(this);
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
-    console.log('constructor state:', this.state);
   }
 
 
@@ -192,7 +191,7 @@ export default class AppContainer extends Component {
 
   render () {
 
-    const props = Object.assign({}, this.state, store.getState(), {
+    const props = Object.assign({}, this.state, {
       toggleOne: this.toggleOne,
       toggle: this.toggle,
       selectAlbum: this.selectAlbum,
@@ -202,7 +201,6 @@ export default class AppContainer extends Component {
       loadSongs: this.loadSongs,
       addSongToPlaylist: this.addSongToPlaylist
     });
-    console.log("this.STATE:", this.state);
     return (
       <div id="main" className="container-fluid">
         <div className="col-xs-2">

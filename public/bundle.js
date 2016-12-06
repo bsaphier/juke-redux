@@ -26518,7 +26518,6 @@
 	    _this.selectPlaylist = _this.selectPlaylist.bind(_this);
 	    _this.loadSongs = _this.loadSongs.bind(_this);
 	    _this.addSongToPlaylist = _this.addSongToPlaylist.bind(_this);
-	    console.log('constructor state:', _this.state);
 	    return _this;
 	  }
 	
@@ -26718,7 +26717,7 @@
 	    key: 'render',
 	    value: function render() {
 	
-	      var props = Object.assign({}, this.state, _store2.default.getState(), {
+	      var props = Object.assign({}, this.state, {
 	        toggleOne: this.toggleOne,
 	        toggle: this.toggle,
 	        selectAlbum: this.selectAlbum,
@@ -26728,7 +26727,6 @@
 	        loadSongs: this.loadSongs,
 	        addSongToPlaylist: this.addSongToPlaylist
 	      });
-	      console.log("this.STATE:", this.state);
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'main', className: 'container-fluid' },
@@ -30417,8 +30415,7 @@
 	
 	var toggle = exports.toggle = function toggle() {
 	  return function (dispatch, getState) {
-	    var _getState = getState(),
-	        isPlaying = _getState.isPlaying;
+	    var isPlaying = getState().player.isPlaying; // see line 60
 	
 	    if (isPlaying) dispatch(pause());else dispatch(play());
 	  };
@@ -30426,22 +30423,23 @@
 	
 	var toggleOne = exports.toggleOne = function toggleOne(selectedSong, selectedSongList) {
 	  return function (dispatch, getState) {
+	
+	    // this is where we had to lift player portion of state
 	    var currentSong = getState().player.currentSong;
 	
-	    console.log('CURRENTSONG', currentSong);
 	    if (selectedSong.id !== currentSong.id) dispatch(startSong(selectedSong, selectedSongList));else dispatch(toggle());
 	  };
 	};
 	
 	var next = exports.next = function next() {
 	  return function (dispatch, getState) {
-	    dispatch(startSong.apply(undefined, _toConsumableArray(skip(1, getState()))));
+	    dispatch(startSong.apply(undefined, _toConsumableArray(skip(1, getState().player))));
 	  };
 	};
 	
 	var prev = exports.prev = function prev() {
 	  return function (dispatch, getState) {
-	    dispatch(startSong.apply(undefined, _toConsumableArray(skip(-1, getState()))));
+	    dispatch(startSong.apply(undefined, _toConsumableArray(skip(-1, getState().player))));
 	  };
 	};
 
@@ -30835,6 +30833,7 @@
 	  var toggle = props.toggle;
 	  var next = props.next;
 	
+	  console.log('PROPS', props);
 	  return _react2.default.createElement(
 	    'footer',
 	    null,
