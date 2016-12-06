@@ -15,7 +15,6 @@ export const initialPlayerState = {
 export default function playerReducer(state = initialPlayerState, action) {
 
   const newState = Object.assign({}, state);
-
   switch (action.type) {
     case START_PLAYING:
       newState.isPlaying = true;

@@ -6,6 +6,7 @@ import {
 } from '../constants';
 
 import AUDIO from '../audio';
+import store from '../store';
 
 
 //*** SYNC ACTION CREATORS ***//
@@ -55,7 +56,9 @@ export const toggle = () => (dispatch, getState) => {
 
 export const toggleOne = (selectedSong, selectedSongList) =>
   (dispatch, getState) => {
-    const { currentSong } = getState();
+
+    const { currentSong } = getState().player;
+    console.log('CURRENTSONG', currentSong);
     if (selectedSong.id !== currentSong.id)
       dispatch(startSong(selectedSong, selectedSongList));
     else dispatch(toggle());
@@ -63,10 +66,10 @@ export const toggleOne = (selectedSong, selectedSongList) =>
 
 export const next = () =>
   (dispatch, getState) => {
-    dispatch(startSong(...skip(1, getState()));
+    dispatch(startSong(...skip(1, getState())));
 };
 
 export const prev = () =>
   (dispatch, getState) => {
-    dispatch(startSong(...skip(-1, getState()));
+    dispatch(startSong(...skip(-1, getState())));
 };
