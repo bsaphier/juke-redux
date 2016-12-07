@@ -26566,9 +26566,6 @@
 	    value: function play() {
 	      _store2.default.dispatch((0, _player.play)());
 	    }
-	    // AUDIO.play();
-	    // this.setState({ isPlaying: true });
-	
 	  }, {
 	    key: 'pause',
 	    value: function pause() {
@@ -26646,7 +26643,6 @@
 	      albums = (0, _utils.convertAlbums)(albums);
 	      artist.albums = albums;
 	      artist.songs = songs;
-	
 	      this.setState({ selectedArtist: artist });
 	    }
 	  }, {
@@ -26727,6 +26723,7 @@
 	        loadSongs: this.loadSongs,
 	        addSongToPlaylist: this.addSongToPlaylist
 	      });
+	      console.log('play:', _player.play);
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'main', className: 'container-fluid' },
@@ -30326,6 +30323,11 @@
 	    case _constants.STOP_PLAYING:
 	      newState.isPlaying = false;
 	      break;
+	    case _constants.SET_CURRENT_SONG:
+	      newState.currentSong = action.currentSong;
+	      break;
+	    case _constants.SET_LIST:
+	      newState.currentSongList = action.currentSongList;
 	    default:
 	      return state;
 	  }
@@ -30831,6 +30833,7 @@
 	  var progress = props.progress;
 	  var prev = props.prev;
 	  var toggle = props.toggle;
+	  var toggleOne = props.toggleOne;
 	  var next = props.next;
 	
 	  console.log('PROPS', props);

@@ -22,6 +22,11 @@ export default function playerReducer(state = initialPlayerState, action) {
     case STOP_PLAYING:
       newState.isPlaying = false;
       break;
+    case SET_CURRENT_SONG:
+      newState.currentSong = action.currentSong;
+      break;
+    case SET_LIST:
+      newState.currentSongList = action.currentSongList;
     default:
       return state;
   }

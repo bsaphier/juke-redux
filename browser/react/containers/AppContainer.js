@@ -72,8 +72,6 @@ export default class AppContainer extends Component {
   play () {
     store.dispatch(play());
   }
-  // AUDIO.play();
-  // this.setState({ isPlaying: true });
 
   pause () {
     store.dispatch(pause());
@@ -133,7 +131,6 @@ export default class AppContainer extends Component {
     albums = convertAlbums(albums);
     artist.albums = albums;
     artist.songs = songs;
-
     this.setState({ selectedArtist: artist });
   }
 
@@ -201,25 +198,26 @@ export default class AppContainer extends Component {
       loadSongs: this.loadSongs,
       addSongToPlaylist: this.addSongToPlaylist
     });
+    console.log('play:', play);
     return (
       <div id="main" className="container-fluid">
-        <div className="col-xs-2">
-          <Sidebar playlists={this.state.playlists} />
-        </div>
-        <div className="col-xs-10">
-        {
-          this.props.children && React.cloneElement(this.props.children, props)
-        }
-        </div>
-        <Player
-          currentSong={this.state.player.currentSong}
-          currentSongList={this.state.player.currentSongList}
-          isPlaying={this.state.player.isPlaying}
-          progress={this.state.player.progress}
-          next={this.next}
-          prev={this.prev}
-          toggle={this.toggle}
-        />
+          <div className="col-xs-2">
+              <Sidebar playlists={this.state.playlists} />
+          </div>
+          <div className="col-xs-10">
+            {
+              this.props.children && React.cloneElement(this.props.children, props)
+            }
+          </div>
+          <Player
+              currentSong={this.state.player.currentSong}
+              currentSongList={this.state.player.currentSongList}
+              isPlaying={this.state.player.isPlaying}
+              progress={this.state.player.progress}
+              next={this.next}
+              prev={this.prev}
+              toggle={this.toggle}
+          />
       </div>
     );
   }

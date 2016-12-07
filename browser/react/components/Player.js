@@ -7,8 +7,9 @@ const Player = (props) => {
   const progress = props.progress;
   const prev = props.prev;
   const toggle = props.toggle;
+  const toggleOne = props.toggleOne;
   const next = props.next;
- 
+
  console.log('PROPS', props)
   return (
     <footer>
@@ -32,6 +33,6 @@ const Player = (props) => {
       </div>
     </footer>
   );
-}
+};
 
 export default Player;
